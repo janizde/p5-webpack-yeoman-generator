@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Jannik Portz",
+      "authorEmail": "hello@jannikportz.de",
+      "authorUrl": "http://jannikportz.de"
+    }
+  }
+}
