@@ -1,7 +1,7 @@
 {
   "name": "generator-p5-webpack",
   "version": "0.1.0",
-  "description": "Yeoman generator for p5.js with webpack, ES6 and optionally TypeScript",
+  "description": "Yeoman generator for p5.js with webpack and babel",
   "homepage": "",
   "author": {
     "name": "Jannik Portz",
@@ -17,7 +17,7 @@
     "javascript",
     "webpack",
     "es6",
-    "typescript",
+    "babel",
     "yeoman-generator"
   ],
   "devDependencies": {

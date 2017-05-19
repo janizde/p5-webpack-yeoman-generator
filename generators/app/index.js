@@ -4,33 +4,80 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 
 module.exports = class extends Generator {
+
   prompting() {
-    // Have Yeoman greet the user.
     this.log(yosay(
-      'Welcome to the groovy ' + chalk.red('generator-p-5-webpack') + ' generator!'
+      'Welcome to the groovy ' + chalk.red('p5-webpack') + ' generator!'
     ));
 
-    const prompts = [{
-      type: 'confirm',
-      name: 'someAnswer',
-      message: 'Would you like to enable this option?',
-      default: true
-    }];
+    const prompts = [
+      {
+        type: 'checkbox',
+        name: 'libraries',
+        message: 'What additional p5 libraries do you want to use?',
+        choices: [
+          {
+            name: 'p5.dom',
+            value: 'dom',
+          },
+          {
+            name: 'p5.sound',
+            value: 'sound',
+          },
+        ],
+      },
+      {
+        type: 'list',
+        name: 'mode',
+        message: 'In which mode do you want to use p5?',
+        choices: [
+          {
+            name: 'Instance mode (recommended)',
+            value: 'instance',
+          },
+          {
+            name: 'Global mode',
+            value: 'global',
+          },
+        ],
+      },
+    ];
 
     return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
+      this.log(props);
       this.props = props;
     });
   }
 
   writing() {
+    // Copy all static files
+    this.fs.copyTpl(
+      this.templatePath('static/**/*'),
+      this.destinationPath('.'),
+      {
+        props: this.props,
+      },
+      null,
+      {
+        globOptions: {
+          dot: true,
+          ignore: [
+            '**/.DS_Store',
+          ],
+        },
+      }
+    );
+
+    // Copy sketch file according to selected mode
     this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
+      this.templatePath(`dynamic/src/sketch/index.${this.props.mode}.js`),
+      this.destinationPath('src/sketch/index.js')
     );
   }
 
   install() {
-    this.installDependencies();
+    this.installDependencies({
+      bower: false,
+    });
   }
 };
