@@ -12,6 +12,35 @@ module.exports = class extends Generator {
 
     const prompts = [
       {
+        type: 'text',
+        name: 'packageName',
+        message: 'Your package\'s name',
+        validate: name => {
+          if (!name.match(/^(@[a-z0-9][a-z0-9-]*[a-z0-9]\/)?[a-z0-9][a-z0-9-]*[a-z0-9]$/)) {
+            return "Your package name does not comply with the npm requirements.";
+          }
+
+          if (name.length > 214) {
+            return "The package name must not be larger than 214 characters.";
+          }
+
+          return true;
+        }
+      },
+      {
+        type: 'text',
+        name: 'packageVersion',
+        message: 'Your package\'s version',
+        default: '0.1.0',
+        validate: version => {
+          if (version.match(/^([0-9]+\.){2}[0-9]+$/)) {
+            return true;
+          }
+
+          return "Version must comply with semver.";
+        },
+      },
+      {
         type: 'checkbox',
         name: 'libraries',
         message: 'What additional p5 libraries do you want to use?',
@@ -44,7 +73,6 @@ module.exports = class extends Generator {
     ];
 
     return this.prompt(prompts).then(props => {
-      this.log(props);
       this.props = props;
     });
   }

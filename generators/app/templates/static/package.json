@@ -1,15 +1,12 @@
 {
-  "name": "p5-boilerplate",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "<%= props.packageName %>",
+  "version": "<%= props.packageVersion %>",
+  "main": "src/index.js",
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack -p",
     "clean": "rm -rf dist"
   },
-  "author": "Jannik Portz",
-  "license": "ISC",
   "dependencies": {
     "p5": "^0.5.9"
   },
