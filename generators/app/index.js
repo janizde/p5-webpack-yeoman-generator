@@ -106,6 +106,7 @@ module.exports = class extends Generator {
   install() {
     this.installDependencies({
       bower: false,
+      callback: () => this.log(`All done. Run ${chalk.bold('npm start')} to start the dev server.`),
     });
   }
 };

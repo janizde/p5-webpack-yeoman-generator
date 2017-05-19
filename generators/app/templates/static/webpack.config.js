@@ -11,6 +11,7 @@ module.exports = {
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
     port: 8080,
+    open: true,
     stats: 'errors-only',
   },
   output: {
