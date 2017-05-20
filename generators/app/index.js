@@ -17,11 +17,11 @@ module.exports = class extends Generator {
         message: 'Your package\'s name',
         validate: name => {
           if (!name.match(/^(@[a-z0-9][a-z0-9-]*[a-z0-9]\/)?[a-z0-9][a-z0-9-]*[a-z0-9]$/)) {
-            return "Your package name does not comply with the npm requirements.";
+            return 'Your package name does not comply with the npm requirements.';
           }
 
           if (name.length > 214) {
-            return "The package name must not be larger than 214 characters.";
+            return 'The package name must not be larger than 214 characters.';
           }
 
           return true;
@@ -37,8 +37,8 @@ module.exports = class extends Generator {
             return true;
           }
 
-          return "Version must comply with semver.";
-        },
+          return 'Version must comply with semver.';
+        }
       },
       {
         type: 'checkbox',
@@ -47,13 +47,13 @@ module.exports = class extends Generator {
         choices: [
           {
             name: 'p5.dom',
-            value: 'dom',
+            value: 'dom'
           },
           {
             name: 'p5.sound',
-            value: 'sound',
-          },
-        ],
+            value: 'sound'
+          }
+        ]
       },
       {
         type: 'list',
@@ -62,14 +62,14 @@ module.exports = class extends Generator {
         choices: [
           {
             name: 'Instance mode (recommended)',
-            value: 'instance',
+            value: 'instance'
           },
           {
             name: 'Global mode',
-            value: 'global',
-          },
-        ],
-      },
+            value: 'global'
+          }
+        ]
+      }
     ];
 
     return this.prompt(prompts).then(props => {
@@ -83,16 +83,16 @@ module.exports = class extends Generator {
       this.templatePath('static/**/*'),
       this.destinationPath('.'),
       {
-        props: this.props,
+        props: this.props
       },
       null,
       {
         globOptions: {
           dot: true,
           ignore: [
-            '**/.DS_Store',
-          ],
-        },
+            '**/.DS_Store'
+          ]
+        }
       }
     );
 
@@ -106,7 +106,7 @@ module.exports = class extends Generator {
   install() {
     this.installDependencies({
       bower: false,
-      callback: () => this.log(`All done. Run ${chalk.bold('npm start')} to start the dev server.`),
+      callback: () => this.log(`All done. Run ${chalk.bold('npm start')} to start the dev server.`)
     });
   }
 };
