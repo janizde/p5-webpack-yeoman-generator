@@ -6,6 +6,7 @@ Yeoman generator for p5.js with webpack, dev server and ES6 through babel
 
 * [Installtion](#installation)
 * [Features](#features)
+* [p5 Libraries](#p5-libraries)
 * [Dev server](#dev-server)
 * [NPM commands](#npm-commands)
 * [Project structure](#project-structure)
@@ -38,6 +39,9 @@ yo p5-webpack
 * Automatic installation of p5.dom and p5.sound if desired
 * Boilerplate sketch in either Instance mode or Global mode
 * `assets` directory to put any assets like audio, images into, which is served by the dev server and bundled in the build process
+
+## <a name="p5-libraries"></a>p5 Libraries
+The generator currently supports all of the **official** p5 libraries (i.e. `p5.dom` and `p5.sound`). However there is **no guaranteed support for community contributed libraries,** as many of them are not available on npm or are not prepared for the use with a module bundler.
 
 ## <a name="dev-server"></a>Dev server
 The dev server builds your whole project through the webpack build pipeline and keeps the generated artifacts in its memory (bundled files are not saved to your disk). It automatically detects when something in your files has changed, builds the changed code with webpack and automatically reloads the browser window.
