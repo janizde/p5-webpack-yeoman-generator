@@ -1,7 +1,22 @@
 # generator-p5-webpack [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> Yeoman generator for p5.js with webpack, ES6 and optionally TypeScript
 
-## Installation
+Yeoman generator for p5.js with webpack, dev server and ES6 through babel
+
+## Contents
+
+* [Installtion](#installation)
+* [Features](#features)
+* [Dev server](#dev-server)
+* [NPM commands](#npm-commands)
+* [Project structure](#project-structure)
+* [Sketch modes](#sketch-modes)
+	* [Instance mode](#instance-mode)
+	* [Global mode](#global-mode)
+* [Getting to know Yeoman](#getting-to-know-yeoman)
+* [Changelog](#changelog)
+* [License](#license)
+
+## <a name="installation"></a>Installation
 
 First, install [Yeoman](http://yeoman.io) and generator-p5-webpack using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
 
@@ -16,14 +31,112 @@ Then generate your new project:
 yo p5-webpack
 ```
 
-## Getting To Know Yeoman
+## <a name="features"></a>Features
+
+* Webpack setup including dev server and build process
+* ES6 support with babel
+* Automatic installation of p5.dom and p5.sound if desired
+* Boilerplate sketch in either Instance mode or Global mode
+* `assets` directory to put any assets like audio, images into, which is served by the dev server and bundled in the build process
+
+## <a name="dev-server"></a>Dev server
+The dev server builds your whole project through the webpack build pipeline and keeps the generated artifacts in its memory (bundled files are not saved to your disk). It automatically detects when something in your files has changed, builds the changed code with webpack and automatically reloads the browser window.
+
+You can change the port on which the HTTP server listens and more dev server related options in the `webpack.config.js`.
+
+[More on the webpack dev server](https://webpack.js.org/configuration/dev-server/)
+
+## <a name="npm-commands"></a>NPM commands
+
+* `npm start`: Runs the dev server and opens the project in your standard browser
+* `npm run build`: Builds the whole project and saves the resulting bundles in the `dist` directory
+* `npm run clean`: Cleans out the `dist` directory
+
+## <a name="project-structure"></a>Project structure
+
+```
+your-project
+|- assets	// assets directory that will be served by the dev server as /assets
+|			// put any required media like audio or images inside this directory
+|			// and reference it in your sketch as /assets/my-file.jpg
+|- src
+|	|- index.html	// Main html file. <script> tags for bundles will be
+|	|				// injected automatically by htm-webpack-plugin
+|	|
+|	|- index.js		// Application entry point. Contains bootstrapping and imports of modules.
+|	|				// Do not put your actual sketch code here.
+|	|
+|	|- sketch		// The source directory of your sketch.
+|		|			// Place all of your custom code in this directory
+|		|
+|		|- index.js	// Entry point of sketch. Contains bootstrap sketch
+|					// based on the selected sketch mode
+|
+|- package.json			// Your package information. Add description and other fields as you like.
+|- webpack.config.js	// The webpack configuration of the project.
+```
+## <a name="sketch-modes"></a>Sketch Modes
+Sketches can either be run in Instance or Global mode. The generator bootstraps an example sketch based on the option you have selected.
+
+You can read about the different modes in the [p5 documentation](https://github.com/processing/p5.js/wiki/Global-and-instance-mode)
+
+### <a name="instance-mode"></a>Instance mode (recommended)
+It is recommended to use Instance mode with this generator as it complies best with the CommonJS module pattern. With Instance mode your sketch lives in its own portion of the project and does not operate in the global namespace.
+
+When creating a project in Instance mode, you will find a bootstrapped `sketch` function in the `src/sketch/index.js` file. This file (module) must export a `sketch` function as the default export. The `sketch` function receives an instance of p5 as its first and only parameter. All of the p5 functions are available as members of this instance. Also, all of the p5 hooks like `setup`, `draw` or `mousePressed` must be set on the p5 instance itself. A very basic sketch would be:
+
+```javascript
+export default sketch(s) {
+	let bgColor;
+	
+	s.setup = () => {
+		bgColor = s.color(s.random(255), s.random(255), s.random(255));
+	};
+	
+	s.draw = () => {
+		s.background(bgColor);
+		s.fill(s.color(255, 0, 0));
+		s.ellipse(0, 0, 10, 10);
+	};
+}
+```
+
+### <a name="global-mode"></a>Global mode
+Though Global mode is the mode that most p5 tutorials and projectss refer to, it is not so easy to integrate it with the CommonJS module system.
+
+While for a standard p5 setup it's enough to specify your hooks by just defining a function in the global namespace (e.g. `function setup() {...}`), in CommonJS modules there is no real global namespace.
+
+When creating a new project in Global mode, you will find a bootstrap sketch in Global mode in the `src/sketch/index.js`. Instead of just defining the `setup`, `draw` etc. functions you will additionally have to export there functions. A code snippet in the `src/index.js` file attaches everything that is exported from the actual sketch file to the global `window` objects, to p5 works as expected. Please also note, that everything else you export from the sketch file will also be attached to the global `window` object. So please make sure you only export hook functions from your sketch file.
+
+The above example in Instance mode would look like this in Global mode:
+
+```javascript
+let bgColor;
+
+export function setup() {
+	bgColor = color(random(255), random(255), random(255));
+}
+
+export function draw() {
+	background(bgColor);
+	fill(color(255, 0, 0));
+	ellipse(0, 0, 10, 10);
+}
+```
+
+## <a name="getting-to-now-yeoman"></a>Getting To Know Yeoman
 
  * Yeoman has a heart of gold.
  * Yeoman is a person with feelings and opinions, but is very easy to work with.
  * Yeoman can be too opinionated at times but is easily convinced not to be.
  * Feel free to [learn more about Yeoman](http://yeoman.io/).
 
-## License
+## <a name="changelog"></a>Changelog
+
+### v0.1.0
+Initial implementation of the generator-p5-webpack containing webpack setup, dev server and global / instance mode.
+
+## <a name="license"></a>License
 
 GPL-3.0 © [Jannik Portz](http://jannikportz.de)
 
