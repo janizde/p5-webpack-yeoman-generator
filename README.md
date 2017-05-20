@@ -54,27 +54,33 @@ You can change the port on which the HTTP server listens and more dev server rel
 
 ## <a name="project-structure"></a>Project structure
 
+### Directory Tree
+
 ```
 your-project
-|- assets	// assets directory that will be served by the dev server as /assets
-|			// put any required media like audio or images inside this directory
-|			// and reference it in your sketch as /assets/my-file.jpg
+|- assets [1]	
 |- src
-|	|- index.html	// Main html file. <script> tags for bundles will be
-|	|				// injected automatically by htm-webpack-plugin
-|	|
-|	|- index.js		// Application entry point. Contains bootstrapping and imports of modules.
-|	|				// Do not put your actual sketch code here.
-|	|
-|	|- sketch		// The source directory of your sketch.
-|		|			// Place all of your custom code in this directory
-|		|
-|		|- index.js	// Entry point of sketch. Contains bootstrap sketch
-|					// based on the selected sketch mode
+|	|- index.html [2]
+|	|- index.js [3]
+|	|- sketch [4]
+|		|- index.js [5]
 |
-|- package.json			// Your package information. Add description and other fields as you like.
-|- webpack.config.js	// The webpack configuration of the project.
+|- package.json
+|- webpack.config.js
 ```
+
+### Description
+
+| Number | File | Description |
+| -------------: | :------------- | :----- |
+| 1 | `assets` | assets directory that will be served by the dev server as `/assets`. Put any required media like audio or images inside this directory and reference it in your sketch as `/assets/my-file.jpg` |
+| 2 | `src/index.html` | HTML template. `<script>` tags for all bundles will be injected automatically by `html-webpack-plugin`. |
+| 3 | `src/index.js` | Application entry point. Contains bootstrapping and imports of modules. Do not put your actual sketch code here. |
+| 4 | `src/sketch` | The source directory of your sketch. Place all of your custom code in this directory. |
+| 5 | `src/sketch/index.js` | Entry point of sketch. Contains bootstrap sketch based on the selected [sketch mode](#sketch-modes) |
+| 6 | `package.json` | Your package information. Add description and other fields as you like. |
+| 7 | `webpack.config.js` | The webpack configuration of the project. |
+
 ## <a name="sketch-modes"></a>Sketch Modes
 Sketches can either be run in Instance or Global mode. The generator bootstraps an example sketch based on the option you have selected.
 
@@ -102,11 +108,11 @@ export default sketch(s) {
 ```
 
 ### <a name="global-mode"></a>Global mode
-Though Global mode is the mode that most p5 tutorials and projectss refer to, it is not so easy to integrate it with the CommonJS module system.
+Though Global mode is the mode that most p5 tutorials and projects refer to, it is not so straight forward to integrate it with the CommonJS module pattern.
 
 While for a standard p5 setup it's enough to specify your hooks by just defining a function in the global namespace (e.g. `function setup() {...}`), in CommonJS modules there is no real global namespace.
 
-When creating a new project in Global mode, you will find a bootstrap sketch in Global mode in the `src/sketch/index.js`. Instead of just defining the `setup`, `draw` etc. functions you will additionally have to export there functions. A code snippet in the `src/index.js` file attaches everything that is exported from the actual sketch file to the global `window` objects, to p5 works as expected. Please also note, that everything else you export from the sketch file will also be attached to the global `window` object. So please make sure you only export hook functions from your sketch file.
+When creating a new project in Global mode, you will find a bootstrapped sketch in Global mode in the `src/sketch/index.js` file. Instead of just defining the `setup`, `draw` etc. functions you will additionally have to export these functions. A code snippet in the `src/index.js` file attaches everything that is exported from the actual sketch file to the global `window` object, so p5 works as expected. Please also note, that everything else you export from the sketch file will also be attached to the global `window` object. So please make sure you only export hook functions from your sketch file.
 
 The above example in Instance mode would look like this in Global mode:
 
