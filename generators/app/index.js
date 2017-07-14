@@ -69,6 +69,12 @@ module.exports = class extends Generator {
             value: 'global'
           }
         ]
+      },
+      {
+        type: 'confirm',
+        name: 'useSASS',
+        message: 'Do you want to use SASS for stylesheets?',
+        default: true,
       }
     ];
 

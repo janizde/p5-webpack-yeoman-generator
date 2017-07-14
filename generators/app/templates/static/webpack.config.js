@@ -3,6 +3,7 @@ const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+<% if (props.useSASS) { %>const ExtractTextPlugin = require('extract-text-webpack-plugin');<% } %>
 
 module.exports = {
   entry: {
@@ -20,15 +21,23 @@ module.exports = {
   },
   resolve: {
     extensions: [
-      '.js'
-    ]
+      '.js',
+      <% if (props.useSASS) { %>'.scss',<% } %>
+    ],
   },
   module: {
     loaders: [
       {
+        test: /\.js$/,
         loader: 'babel-loader',
-        test: /\.js$/
       }
+      <% if (props.useSASS) %>{
+        test: /\.scss$/,
+        use: ExtractTextWebpackPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', 'sass-loader'],
+        }),
+      },<% } %>
     ],
   },
   plugins: [
@@ -36,6 +45,7 @@ module.exports = {
       template: path.resolve(__dirname, 'src', 'index.html'),
       inject: 'body',
     }),
+    <% if (props.useSASS) { %>new ExtractTextWebpackPlugin('./[name].[hash].css'),<% } %>
     new CopyWebpackPlugin([
       {
         from: path.resolve(__dirname, 'assets'),
