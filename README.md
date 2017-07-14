@@ -62,7 +62,7 @@ You can change the port on which the HTTP server listens and more dev server rel
 
 ```
 your-project
-|- assets [1]	
+|- assets [1]
 |- src
 |	|- index.html [2]
 |	|- index.js [3]
@@ -98,11 +98,11 @@ When creating a project in Instance mode, you will find a bootstrapped `sketch` 
 ```javascript
 export default sketch(s) {
 	let bgColor;
-	
+
 	s.setup = () => {
 		bgColor = s.color(s.random(255), s.random(255), s.random(255));
 	};
-	
+
 	s.draw = () => {
 		s.background(bgColor);
 		s.fill(s.color(255, 0, 0));
@@ -142,6 +142,11 @@ export function draw() {
  * Feel free to [learn more about Yeoman](http://yeoman.io/).
 
 ## <a name="changelog"></a>Changelog
+
+### v0.1.1
+
+* Fixed bug that did not load sketched in global mode properly @carolineartz
+* Added quick fix for `webpack-dev-server` at version `2.5.0`, see [issue on GitHub](https://github.com/webpack/webpack-dev-server/issues/972) @janizde
 
 ### v0.1.0
 Initial implementation of the generator-p5-webpack containing webpack setup, dev server and global / instance mode.
