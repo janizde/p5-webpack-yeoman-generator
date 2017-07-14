@@ -5,7 +5,7 @@
 import * as sketchHooks from './sketch';
 
 // Attach everything that is exported from sketch to window
-(w => Object.keys(sketchHooks).forEach(hook => { w[hook] = sketch[hook]; }))(window);
+(w => Object.keys(sketchHooks).forEach(hook => { w[hook] = sketchHooks[hook]; }))(window);
 <% } else { %>
 import sketch from './sketch';
 
