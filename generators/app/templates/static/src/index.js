@@ -1,6 +1,5 @@
 <% if (props.mode === 'global') { %>import 'p5';<% } else { %>import p5 from 'p5';<% } %>
 <% if (props.libraries.indexOf('sound') > -1) { %>import 'p5/lib/addons/p5.sound';<% } %>
-<% if (props.libraries.indexOf('dom') > -1) { %>import 'p5/lib/addons/p5.dom';<% } %>
 <% if (props.mode === 'global') { %>
 import * as sketchHooks from './sketch';
 

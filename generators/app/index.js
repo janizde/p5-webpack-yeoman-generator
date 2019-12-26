@@ -45,10 +45,6 @@ module.exports = class extends Generator {
         message: 'What additional p5 libraries do you want to use?',
         choices: [
           {
-            name: 'p5.dom',
-            value: 'dom'
-          },
-          {
             name: 'p5.sound',
             value: 'sound'
           }
