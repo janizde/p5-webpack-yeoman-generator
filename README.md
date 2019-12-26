@@ -143,6 +143,21 @@ export function draw() {
 
 ## <a name="changelog"></a>Changelog
 
+### v0.2.0
+
+* Generator
+	* Upgrade yeoman toolchain to `yeoman-generator@^4.4.0` `yosay@^2.0.0`
+	* Upgrade test dependencies to `jest@^24.9.0`, `jest-cli@^24.9.0`, `yeoman-assert@^3.0.0`, `yeoman-test@^2.0.0`
+	* Replace deprecated `nps` with `npm audit`
+	* Remove library option `p5.dom` (now part of `p5`)
+* Project template
+	* Upgrade p5 to `p5@^0.10.2`
+	* Upgrade babel & friends to `@babel/core@^7.0.0`
+	* Drop `stage-0` preset of babel
+	* Add `browserslist` entry to `package.json`
+	* Upgrade webpack & friends to `webpack@^4.41.4`
+	* Remove `vendor` commons chunk
+
 ### v0.1.1
 
 * Fixed bug that did not load sketched in global mode properly @carolineartz
