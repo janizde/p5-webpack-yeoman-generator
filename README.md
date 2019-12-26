@@ -1,4 +1,4 @@
-# generator-p5-webpack [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# generator-p5-webpack [![NPM version][npm-image]][npm-url] [![Build Status](https://travis-ci.org/janizde/p5-webpack-yeoman-generator.svg?branch=master)](https://travis-ci.org/janizde/p5-webpack-yeoman-generator) [![Dependency Status](https://david-dm.org/janizde/p5-webpack-yeoman-generator.svg)](https://david-dm.org/janizde/p5-webpack-yeoman-generator)
 
 Yeoman generator for p5.js with webpack, dev server and ES6 through babel
 
