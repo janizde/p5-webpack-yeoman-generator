@@ -4,7 +4,6 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 
 module.exports = class extends Generator {
-
   prompting() {
     this.log(yosay(
       'Welcome to the groovy ' + chalk.red('p5-webpack') + ' generator!'
