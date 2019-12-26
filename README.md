@@ -1,4 +1,4 @@
-# generator-p5-webpack [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
+# generator-p5-webpack [![NPM version][npm-image]][npm-url] [![Build Status](https://travis-ci.org/janizde/p5-webpack-yeoman-generator.svg?branch=master)](https://travis-ci.org/janizde/p5-webpack-yeoman-generator) [![Dependency Status](https://david-dm.org/janizde/p5-webpack-yeoman-generator.svg)](https://david-dm.org/janizde/p5-webpack-yeoman-generator)
 
 Yeoman generator for p5.js with webpack, dev server and ES6 through babel
 
@@ -7,6 +7,7 @@ Yeoman generator for p5.js with webpack, dev server and ES6 through babel
 * [Installtion](#installation)
 * [Features](#features)
 * [p5 Libraries](#p5-libraries)
+* [Babel presets and plugins](#babel)
 * [Dev server](#dev-server)
 * [NPM commands](#npm-commands)
 * [Project structure](#project-structure)
@@ -41,7 +42,13 @@ yo p5-webpack
 * `assets` directory to put any assets like audio, images into, which is served by the dev server and bundled in the build process
 
 ## <a name="p5-libraries"></a>p5 Libraries
-The generator currently supports all of the **official** p5 libraries (i.e. `p5.dom` and `p5.sound`). However there is **no guaranteed support for community contributed libraries,** as many of them are not available on npm or are not prepared for the use with a module bundler.
+The generator currently supports all of the **official** p5 libraries (i.e. `p5.sound`). However there is **no guaranteed support for community contributed libraries,** as many of them are not available on npm or are not prepared for the use with a module bundler.
+
+> **Note:** Previous versions of this generator offered to include the official library `p5.dom` which became part of the p5 core. Hence, this option has been removed from the generator dialog and will be enhanced with more options soon.
+
+## <a name="babel"></a>Babel presets and plugins
+
+Previous versions of this generator included `stage-0` plugins to make use of next generation JavaScript features. Since version `v0.2.0` only the `preset-env` preset is shipped with the template and selects language features based on the `browserslist` entry in `package.json`. Plugins for rules of other stages have to be added manually. Options to include polyfills from `core-js` and `regenerator-runtime` will be included in a future version.
 
 ## <a name="dev-server"></a>Dev server
 The dev server builds your whole project through the webpack build pipeline and keeps the generated artifacts in its memory (bundled files are not saved to your disk). It automatically detects when something in your files has changed, builds the changed code with webpack and automatically reloads the browser window.
@@ -142,6 +149,21 @@ export function draw() {
  * Feel free to [learn more about Yeoman](http://yeoman.io/).
 
 ## <a name="changelog"></a>Changelog
+
+### v0.2.0
+
+* Generator
+	* Upgrade yeoman toolchain to `yeoman-generator@^4.4.0` `yosay@^2.0.0`
+	* Upgrade test dependencies to `jest@^24.9.0`, `jest-cli@^24.9.0`, `yeoman-assert@^3.0.0`, `yeoman-test@^2.0.0`
+	* Replace deprecated `nps` with `npm audit`
+	* Remove library option `p5.dom` (now part of `p5`)
+* Project template
+	* Upgrade p5 to `p5@^0.10.2`
+	* Upgrade babel & friends to `@babel/core@^7.0.0`
+	* Drop `stage-0` preset of babel
+	* Add `browserslist` entry to `package.json`
+	* Upgrade webpack & friends to `webpack@^4.41.4`
+	* Remove `vendor` commons chunk
 
 ### v0.1.1
 
