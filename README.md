@@ -7,6 +7,7 @@ Yeoman generator for p5.js with webpack, dev server and ES6 through babel
 * [Installtion](#installation)
 * [Features](#features)
 * [p5 Libraries](#p5-libraries)
+* [Babel presets and plugins](#babel)
 * [Dev server](#dev-server)
 * [NPM commands](#npm-commands)
 * [Project structure](#project-structure)
@@ -41,7 +42,13 @@ yo p5-webpack
 * `assets` directory to put any assets like audio, images into, which is served by the dev server and bundled in the build process
 
 ## <a name="p5-libraries"></a>p5 Libraries
-The generator currently supports all of the **official** p5 libraries (i.e. `p5.dom` and `p5.sound`). However there is **no guaranteed support for community contributed libraries,** as many of them are not available on npm or are not prepared for the use with a module bundler.
+The generator currently supports all of the **official** p5 libraries (i.e. `p5.sound`). However there is **no guaranteed support for community contributed libraries,** as many of them are not available on npm or are not prepared for the use with a module bundler.
+
+> **Note:** Previous versions of this generator offered to include the official library `p5.dom` which became part of the p5 core. Hence, this option has been removed from the generator dialog and will be enhanced with more options soon.
+
+## <a name="babel"></a>Babel presets and plugins
+
+Previous versions of this generator included `stage-0` plugins to make use of next generation JavaScript features. Since version `v0.2.0` only the `preset-env` preset is shipped with the template and selects language features based on the `browserslist` entry in `package.json`. Plugins for rules of other stages have to be added manually. Options to include polyfills from `core-js` and `regenerator-runtime` will be included in a future version.
 
 ## <a name="dev-server"></a>Dev server
 The dev server builds your whole project through the webpack build pipeline and keeps the generated artifacts in its memory (bundled files are not saved to your disk). It automatically detects when something in your files has changed, builds the changed code with webpack and automatically reloads the browser window.
