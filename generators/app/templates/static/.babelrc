@@ -1,7 +1,9 @@
 {
   "presets": [
-    "es2015",
-    "stage-0"
+    "@babel/preset-env"
   ],
-  "compact": false
+  "compact": false,
+  "exclude": [
+    "node_modules"
+  ]
 }

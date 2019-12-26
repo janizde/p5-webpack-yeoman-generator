@@ -56,25 +56,13 @@ describe('generator-p5-webpack:app', () => {
         });
     });
 
-    it('should only reference selected libraries', () => {
+    it('should reference p5.sound when selected', () => {
       return helpers.run(generatorPath)
         .withPrompts(makeProps({
           libraries: ['sound']
         }))
         .then(() => {
           assert.fileContent('src/index.js', 'import \'p5/lib/addons/p5.sound\';');
-          assert.noFileContent('src/index.js', 'import \'p5/lib/addons/p5.dom\';');
-        });
-    });
-
-    it('should reference multiple libraries when selected', () => {
-      return helpers.run(generatorPath)
-        .withPrompts(makeProps({
-          libraries: ['sound', 'dom']
-        }))
-        .then(() => {
-          assert.fileContent('src/index.js', 'import \'p5/lib/addons/p5.sound\';');
-          assert.fileContent('src/index.js', 'import \'p5/lib/addons/p5.dom\';');
         });
     });
   });

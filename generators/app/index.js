@@ -4,7 +4,6 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 
 module.exports = class extends Generator {
-
   prompting() {
     this.log(yosay(
       'Welcome to the groovy ' + chalk.red('p5-webpack') + ' generator!'
@@ -45,10 +44,6 @@ module.exports = class extends Generator {
         name: 'libraries',
         message: 'What additional p5 libraries do you want to use?',
         choices: [
-          {
-            name: 'p5.dom',
-            value: 'dom'
-          },
           {
             name: 'p5.sound',
             value: 'sound'
