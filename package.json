@@ -1,6 +1,6 @@
 {
   "name": "generator-p5-webpack",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Yeoman generator for p5.js with webpack and babel",
   "homepage": "https://github.com/janizde/p5-webpack-yeoman-generator",
   "author": {
@@ -22,23 +22,22 @@
   ],
   "devDependencies": {
     "coveralls": "^3.1.0",
-    "eslint": "^7.1.0",
-    "eslint-config-xo-space": "^0.24.0",
-    "jest": "^26.0.1",
-    "jest-cli": "^26.0.1",
+    "eslint": "^7.4.0",
+    "eslint-config-xo-space": "^0.25.0",
+    "jest": "^26.1.0",
+    "jest-cli": "^26.1.0",
     "yeoman-assert": "^3.1.1",
     "yeoman-test": "^2.6.0"
   },
   "dependencies": {
-    "chalk": "^3.0.0",
-    "yeoman-generator": "^4.10.1",
+    "chalk": "^4.1.0",
+    "yeoman-generator": "^4.11.0",
     "yosay": "^2.0.2"
   },
   "jest": {
     "testEnvironment": "node"
   },
   "scripts": {
-    "prepublish": "npm audit",
     "pretest": "eslint . --fix",
     "test": "jest"
   },
