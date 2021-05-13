@@ -155,6 +155,10 @@ export function draw() {
 
 ## <a name="changelog"></a>Changelog
 
+### v0.2.4
+
+Upgrade dependencies
+
 ### v0.2.3
 
 Upgrade dependencies
